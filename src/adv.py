@@ -1,24 +1,37 @@
 from room import Room
 from player import Player
+from item import Item
+
+
+# Declare all the items
+
+item = {
+    'magic wand': Item('magic wand', """This magic wand is magical!"""),
+    'gold coins': Item('gold coins', 'Gold coins for your pocket'),
+    'mystical potion': Item('mystical potion', 'Mystical potion to make you invisible'),
+    'crystal skull': Item('crystal skull', 'The myth of the crystal skulls is true!'),
+    'crystal ball': Item('crystal ball', 'See your future with this crystal ball'),
+    'wizzard hat': Item('wizzard hat', 'Channle your inner wizzard with this hat')
+}
 # Declare all the rooms
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons", "outside"),
+                     "North of you, the cave mount beckons", "outside", [item['magic wand'], ]),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east.""", "foyer"),
+passages run north and east.""", "foyer", [item['magic wand'], ]),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm.""", "overlook"),
+the distance, but there is no way across the chasm.""", "overlook", [item['magic wand'], ]),
 
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air.""", "narrow"),
+to north. The smell of gold permeates the air.""", "narrow", [item['magic wand'], ]),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south.""", "treasure"),
+earlier adventurers. The only exit is to the south.""", "treasure", [item['magic wand'], ]),
 }
 
 
@@ -39,6 +52,7 @@ room['treasure'].s_to = room['narrow']
 
 
 # # *  Make a new player object that is currently in the 'outside' room.
+playerName = input('Please enter your name: ')
 player = Player('outside')
 
 commandlist = ('n', 'e', 's', 'w', 'q')
