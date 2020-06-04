@@ -36,7 +36,19 @@ room['treasure'].s_to = room['narrow']
 #
 # Main
 #
+
+
+# # *  Make a new player object that is currently in the 'outside' room.
+player = Player('outside')
+
 commandlist = ('n', 'e', 's', 'w', 'q')
+
+# * Inventory
+
+
+def inv_item(item):
+    player.items.append(item)
+    return
 
 
 def move_player(direction, current_location):
@@ -48,9 +60,6 @@ def move_player(direction, current_location):
         return 0
 
 
-# # *  Make a new player object that is currently in the 'outside' room.
-player = Player('outside')
-
 # # *  Write a loop that:
 while True:
 
@@ -58,20 +67,20 @@ while True:
     print(f'Your Location : {player.room}')
 
 # # * Prints the current description (the textwrap module might be useful here).
-    print(room[player.room.lower()].description)
+    print(room[player.room].description)
 
 # # * Waits for user input and decides what to do.
     a = input('Which way do you want to go?  N, S, E, W or Q to quit:')
 
-
 # # *  If the user enters a cardinal direction, attempt to move to the room there.
     if any(string in a for string in commandlist):
         player.room = move_player(a, player.room)
-        break
+
 # # * If the user enters "q", quit the game.
-        elif direction == "q":
-            print("you've ended the game")
-            break
+# elif:
+#     direction == "q":
+# print("you've ended the game")
+
 # # *  Print an error message if the movement isn't allowed.
-        else:
-            print('Not a valid direction, please use N, S, E, W or Q to quit.')
+else:
+    print('Not a valid direction, please use N, S, E, W or Q to quit.')
