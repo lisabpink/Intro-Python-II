@@ -1,5 +1,6 @@
 from room import Room
 from player import Player
+import textwrap
 from item import Item
 
 
@@ -17,21 +18,21 @@ item = {
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons", "outside", [item['magic wand'], ]),
+                     "North of you, the cave mount beckons"),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east.""", "foyer", [item['magic wand'], ]),
+passages run north and east."""),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm.""", "overlook", [item['magic wand'], ]),
+the distance, but there is no way across the chasm."""),
 
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air.""", "narrow", [item['magic wand'], ]),
+to north. The smell of gold permeates the air."""),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south.""", "treasure", [item['magic wand'], ]),
+earlier adventurers. The only exit is to the south."""),
 }
 
 
@@ -52,49 +53,21 @@ room['treasure'].s_to = room['narrow']
 
 
 # # *  Make a new player object that is currently in the 'outside' room.
-playerName = input('Please enter your name: ')
-player = Player('outside')
-
-commandlist = ('n', 'e', 's', 'w', 'q')
-
-# * Inventory
-
-
-def inv_item(item):
-    player.items.append(item)
-    return
-
-
-def move_player(direction, current_location):
-    attribute = f'{direction}_to'
-    if hasattr(room[current_location], attribute):
-        return getattr(room[current_location], attribute).location
-    else:
-        print(f'THIS IS THE ATTRIBUTE::: {attribute}')
-        return 0
+# playerName = input('Please enter your name: ')
+player = Player("LDC", room['outside'])
 
 
 # # *  Write a loop that:
 while True:
 
     # # * Prints the current room name
-    print(f'Your Location : {player.room}')
 
-# # * Prints the current description (the textwrap module might be useful here).
-    print(room[player.room].description)
+    # # * Prints the current description (the textwrap module might be useful here).
 
-# # * Waits for user input and decides what to do.
-    a = input('Which way do you want to go?  N, S, E, W or Q to quit:')
+    # # * Waits for user input and decides what to do.
 
-# # *  If the user enters a cardinal direction, attempt to move to the room there.
-    if any(string in a for string in commandlist):
-        player.room = move_player(a, player.room)
+    # # *  If the user enters a cardinal direction, attempt to move to the room there.
 
-# # * If the user enters "q", quit the game.
-# elif:
-#     direction == "q":
-# print("you've ended the game")
+    # # * If the user enters "q", quit the game.
 
-# # *  Print an error message if the movement isn't allowed.
-else:
-    print('Not a valid direction, please use N, S, E, W or Q to quit.')
+    # # *  Print an error message if the movement isn't allowed.
