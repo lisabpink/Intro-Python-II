@@ -53,21 +53,86 @@ room['treasure'].s_to = room['narrow']
 
 
 # # *  Make a new player object that is currently in the 'outside' room.
-# playerName = input('Please enter your name: ')
+playerName = input('Please enter your name: ')
 player = Player("LDC", room['outside'])
 
 
 # # *  Write a loop that:
+# # * Prints the current room name
+# # * Prints the current description (the textwrap module might be useful here).
+# # * Waits for user input and decides what to do.
+# # *  If the user enters a cardinal direction, attempt to move to the room there.
+# # * If the user enters "q", quit the game.
+# # *  Print an error message if the movement isn't allowed.
+
+def print_menu():
+    print(f"----MENU----")
+    print("N: Travel north")
+    print("S: Travel south")
+    print("E: Travel east")
+    print("W: Travel west")
+    print("Q: Quit the game")
+
+# # * Prints the current room name
+
+
+def print_location():
+    print(f"---Current Location---\n{player.location.get_name()}")
+# # * Prints the current description (the textwrap module might be useful here).
+    for line in textwrap.wrap(player.location.get_description()):
+        print(f"{line}")
+
+
+print_menu()
+print()
+print_location()
+
 while True:
-
-    # # * Prints the current room name
-
-    # # * Prints the current description (the textwrap module might be useful here).
-
     # # * Waits for user input and decides what to do.
+    choice = input("\nWhich way do you want to go?  N, S, E, W or Q to quit: ")
 
-    # # *  If the user enters a cardinal direction, attempt to move to the room there.
+# # *  If the user enters a cardinal direction, attempt to move to the room there.
+    if choice == "n":
+        if player.location.n_to == None:
+            print("Nothing in this direction.")
+        else:
+            player.location = player.location.n_to
+            print(f"---Current Location:---\n{player.location.get_name()}")
+            for line in textwrap.wrap(player.location.get_description()):
+                print(line)
 
-    # # * If the user enters "q", quit the game.
+    elif choice == "e":
+        if player.location.e_to == None:
+            print("Nothing in this direction.")
+        else:
+            player.location = player.location.e_to
+            print(f"---Current Location:---\n{player.location.get_name()}")
+            for line in textwrap.wrap(player.location.get_description()):
+                print(line)
 
-    # # *  Print an error message if the movement isn't allowed.
+    elif choice == "s":
+        if player.location.s_to == None:
+            print("Nothing in this direction.")
+        else:
+            player.location = player.location.s_to
+            print(f"---Current Location:---\n{player.location.get_name()}")
+            for line in textwrap.wrap(player.location.get_description()):
+                print(line)
+
+    elif choice == "w":
+        if player.location.w_to == None:
+            print("Nothing in this direction.")
+        else:
+            player.location = player.location.w_to
+            print(f"---Current Location:---\n{player.location.get_name()}")
+            for line in textwrap.wrap(player.location.get_description()):
+                print(line)
+
+# # * If the user enters "q", quit the game.
+    elif choice == "q":
+        print("quit")
+        break
+
+  # # *  Print an error message if the movement isn't allowed.
+    else:
+        print("Invalid direction. Please try again.")
